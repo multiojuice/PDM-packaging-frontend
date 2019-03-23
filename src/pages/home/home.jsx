@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { Container, Header, OptionsContainer, OptionBox } from './styledComponents';
 
 class Home extends Component {
   constructor(props) {
@@ -8,8 +11,40 @@ class Home extends Component {
     }
   }
 
+  renderOptions() {
+    const options = [
+      {
+        name: 'Client site',
+        path: '/client'
+      },
+      {
+        name: 'Transport driver site',
+        path: '/transport'
+      },
+      {
+        name: 'Customer Clerk site',
+        path: '/clerk'
+      }
+    ];
+
+    return options.map((item, index) =>
+      <OptionBox>
+        <NavLink to={item.path}>{item.name}</NavLink>
+      </OptionBox>
+    );
+  }
+
   render() {
-    return <div>Home page</div>
+    return (
+      <Container>
+        <Header>
+          Welcome to Package Distribution Manager
+        </Header>
+        <OptionsContainer>
+          {this.renderOptions()}
+        </OptionsContainer>
+      </Container>
+    );
   }
 }
 

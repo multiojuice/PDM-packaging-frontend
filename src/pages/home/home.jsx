@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Container, Header, OptionsContainer, OptionBox } from './styledComponents';
+import { Container, Header, OptionsContainer, OptionBox, Instructions } from './styledComponents';
 
 class Home extends Component {
   constructor(props) {
@@ -40,6 +40,9 @@ class Home extends Component {
         <Header>
           Welcome to Package Distribution Manager
         </Header>
+        <Instructions>
+          Choose the portal that fits your use case
+        </Instructions>
         <OptionsContainer>
           {this.renderOptions()}
         </OptionsContainer>

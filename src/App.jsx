@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import {
-  Home
+  Home,
+  Client,
+  Clerk,
+  Transport
 } from './pages';
 
 class App extends Component {
@@ -11,6 +14,9 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/client" component={Client} />
+          <Route path="/clerk" component={Clerk} />
+          <Route path="/transport" component={Transport} />
         </Switch>
       </BrowserRouter>
     );

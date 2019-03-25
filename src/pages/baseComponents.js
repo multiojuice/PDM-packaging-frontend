@@ -5,6 +5,15 @@ export const RowFlex = styled.div`
   justify-content: space-between;
 `;
 
+export const RowFlexClose = styled.div`
+  display: flex;
+`;
+
+export const ColumnFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Title = styled.h1`
   color: grey;
 `;
@@ -44,4 +53,12 @@ export const TableData = styled.td`
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+`;
+
+export const Option = styled.option`
+  margin: 10px;
+`;
+
+export const Select = styled.select`
+  margin-right: 10px;
 `;

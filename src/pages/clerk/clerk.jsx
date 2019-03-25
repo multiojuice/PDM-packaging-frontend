@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { Button, RowFlex, Title, ButtonContainer } from '../baseComponents';
+import NewOrder from './newOrder';
 class Clerk extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,7 @@ class Clerk extends Component {
           </ButtonContainer>
         </RowFlex>
         <Switch>
-
+          <Route path="/clerk" exact component={NewOrder}/>
         </Switch>
       </div>
     )

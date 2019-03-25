@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { Button, RowFlex, Title, ButtonContainer } from '../baseComponents';
+import CurrentDeliveries from './currentDeliveries';
 class Transport extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,7 @@ class Transport extends Component {
           </ButtonContainer>
         </RowFlex>
         <Switch>
-
+          <Route path="/transport" exact component={CurrentDeliveries} />
         </Switch>
       </div>
     )

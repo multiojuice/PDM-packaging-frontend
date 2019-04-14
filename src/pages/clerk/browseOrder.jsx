@@ -5,7 +5,13 @@ class BrowseOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: null
+      content: null,
+      orderID: null,
+      senderID: null,
+      receiverID: null,
+      isPrePaid: null,
+      cost: null,
+      completed: null
     }
   }
   
@@ -13,8 +19,19 @@ class BrowseOrder extends Component {
     this.getOrders();
   }
 
-  getOrders() {
-    fetch('http://localhost:8080/order')
+  getOrders = () => {
+    let {orderID, senderID, receiverID, isPrePaid, cost, completed} = this.state;
+    orderID = orderID !== '' && orderID !== null ? `orderID=${orderID}&` : '';
+    senderID = senderID !== '' && senderID !== null ? `senderID=${senderID}&` : '';
+    isPrePaid = isPrePaid !== '' && isPrePaid !== null ? `isPrePaid=${isPrePaid}&` : '';
+    receiverID = receiverID !== '' && receiverID !== null ? `receiverID=${receiverID}&` : '';
+    cost = cost !== '' && cost !== null ? `cost=${cost}&` : '';
+    completed = completed !== '' && completed !== null ? `completed=${completed}&` : '';
+
+    const str = orderID + senderID + isPrePaid + receiverID + cost + completed;
+    console.warn(str);
+
+    fetch(`http://localhost:8080/order?${str}`)
       .then(resp => resp.json())
       .then(content => this.setState({content}));
   }
@@ -47,7 +64,7 @@ class BrowseOrder extends Component {
     return (
       <div>
         <RowFlex>
-        <ColumnFlex>
+          <ColumnFlex>
             <p>OrderId:</p>
             <textarea id="orderID" onChange={this.handleOnChange}/>
           </ColumnFlex>
@@ -60,6 +77,29 @@ class BrowseOrder extends Component {
             <textarea id="receiverID" onChange={this.handleOnChange}/>
           </ColumnFlex>
         </RowFlex>
+        <RowFlex>
+        <ColumnFlex>
+            <p>Is Pre-Paid</p>
+            <Select id="isPrePaid" onChange={this.handleOnChange}>
+              <option value="">Any</option>
+              <option value="1">True</option>
+              <option value="0">False</option>
+            </Select>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Cost less than:</p>
+            <textarea id="cost" onChange={this.handleOnChange}/>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Completed</p>
+            <Select id="completed" onChange={this.handleOnChange}>
+              <option value="">Any</option>
+              <option value="1">True</option>
+              <option value="0">False</option>
+            </Select>
+          </ColumnFlex>
+        </RowFlex>
+        <Button onClick={this.getOrders}></Button>
         <Table>
           <thead>
             <tr>

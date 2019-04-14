@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { Button, RowFlex, Title, ButtonContainer } from '../baseComponents';
 import NewOrder from './newOrder';
+import BrowseOrder from './browseOrder';
 class Clerk extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ class Clerk extends Component {
 
     }
   }
+
   render() {
     return (
       <div>
@@ -17,11 +19,12 @@ class Clerk extends Component {
           <Title>PDM Clerk</Title>
           <ButtonContainer>
             <Button>New Order</Button>
-            <Button>Browse Orders</Button>
+            <Button href='/clerk/browse'>Browse Orders</Button>
           </ButtonContainer>
         </RowFlex>
         <Switch>
           <Route path="/clerk" exact component={NewOrder}/>
+          <Route path="/clerk/browse" component={BrowseOrder} />
         </Switch>
       </div>
     )

@@ -18,7 +18,7 @@ class Clerk extends Component {
         <RowFlex>
           <Title>PDM Clerk</Title>
           <ButtonContainer>
-            <Button>New Order</Button>
+            <Button href='/clerk'>New Order</Button>
             <Button href='/clerk/browse'>Browse Orders</Button>
           </ButtonContainer>
         </RowFlex>

@@ -43,9 +43,9 @@ class BrowseOrder extends Component {
     return arr.slice().map((item, index) => {
       return (
         <TableRow key={index}>
-          <TableData>{item.orderID}</TableData>
-          <TableData>{item.senderID}</TableData>
-          <TableData>{item.receiverID}</TableData>
+          <TableData><a href={`/client/order/${item.orderID}`}>{item.orderID}</a></TableData>
+          <TableData>{item.sender}</TableData>
+          <TableData>{item.receiver}</TableData>
           <TableData>${item.cost}</TableData>
           <TableData>{item.complete === true ? 'Yes' : 'No'}</TableData>
           <TableData>{item.prePaid === true ? 'Yes' : 'No'}</TableData>

@@ -99,7 +99,7 @@ class BrowseOrder extends Component {
             </Select>
           </ColumnFlex>
         </RowFlex>
-        <Button onClick={this.getOrders}></Button>
+        <Button onClick={this.getOrders}>Go!</Button>
         <Table>
           <thead>
             <tr>

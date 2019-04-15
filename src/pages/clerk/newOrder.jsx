@@ -39,7 +39,7 @@ class NewOrder extends Component {
     return (
       <div>
         <ColumnFlex>
-          <p>New Order Info</p>
+          <h2>New Order Info</h2>
         </ColumnFlex>
         <RowFlexClose>
           <ColumnFlex>
@@ -59,6 +59,41 @@ class NewOrder extends Component {
             </select>
           </ColumnFlex>
         </RowFlexClose>
+
+        <h2>Packages:</h2>
+
+        <RowFlex>
+          <h3>1.</h3>
+          <ColumnFlex>
+            <p>Weight:</p>
+            <input></input>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Traits</p>
+            <input></input>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Delivery Speed:</p>
+            <input></input>
+          </ColumnFlex>
+        </RowFlex>
+        <RowFlex>
+          <h3>2.</h3>
+          <ColumnFlex>
+            <p>Weight:</p>
+            <input></input>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Traits</p>
+            <input></input>
+          </ColumnFlex>
+          <ColumnFlex>
+            <p>Delivery Speed:</p>
+            <input></input>
+          </ColumnFlex>
+        </RowFlex>
+
+        <h3>Price: $24.10</h3>
         
         <div style={{padding:'40px'}}></div>
         <Button onClick={this.postOrder}>Submit</Button>

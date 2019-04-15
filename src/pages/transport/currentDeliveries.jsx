@@ -10,43 +10,46 @@ class CurrentDeliveries extends Component {
       userID: 4,
       isPrePaid: null,
       cost: null,
-      completed: null
+      completed: null,
+      to: 1,
+      from: 8
     }
   }
   
   componentDidMount() {
-    this.getOrders();
+    this.getStops();
   }
 
-  getOrders = () => {
-    let {orderID, userID, isPrePaid, cost, completed} = this.state;
-    orderID = orderID !== '' && orderID !== null ? `orderID=${orderID}&` : '';
-    userID = userID !== '' && userID !== null ? `userID=${userID}&` : '';
-    isPrePaid = isPrePaid !== '' && isPrePaid !== null ? `isPrePaid=${isPrePaid}&` : '';
-    cost = cost !== '' && cost !== null ? `cost=${cost}&` : '';
-    completed = completed !== '' && completed !== null ? `completed=${completed}&` : '';
+  getStops = () => {
+    let {to} = this.state;
 
-    const str = orderID + userID + isPrePaid + cost + completed;
-    console.warn(str);
-
-    fetch(`http://localhost:8080/order/user?${str}`)
+    fetch(`http://localhost:8080/tracking/stops?locationID=${to}`)
       .then(resp => resp.json())
-      .then(content => this.setState({content}));
+      .then(content => this.filterObjects(content));
+  }
+
+  filterObjects(content) {
+    console.error(content)
+    if(content === null) return;
+    content = content.data.filter(item => {
+
+      return item.currentlocationID === parseInt(this.state.from)
+    });
+    console.warn('BOOM', content)
+    this.setState({content});
   }
 
   renderData() {
     const arr = this.state.content.count > 101
-    ? this.state.content.data.slice(0,100) : this.state.content.data;
+    ? this.state.content.slice(0,100) : this.state.content;
 
     return arr.slice().map((item, index) => {
       return (
         <TableRow key={index}>
-          <TableData><a href={`/client/order/${item.orderID}`}>{item.orderID}</a></TableData>
-          <TableData>{item.senderID}</TableData>
-          <TableData>{item.receiverID}</TableData>
-          <TableData>${item.cost}</TableData>
-          <TableData>{item.complete === true ? 'Yes' : 'No'}</TableData>
-          <TableData>{item.prePaid === true ? 'Yes' : 'No'}</TableData>
+          <TableData>{item.trackingID}</TableData>
+          <TableData>{item.upcominglocationName}</TableData>
+          <TableData>{item.currentlocationName}</TableData>
+          <TableData>{item.stopNumber}</TableData>
         </TableRow>
       );
     })
@@ -61,45 +64,25 @@ class CurrentDeliveries extends Component {
     console.warn(this.state);
     return (
       <div>
-        <input id="userID" onChange={this.handleOnChange}></input>
         <RowFlex>
           <ColumnFlex>
-            <p>OrderId:</p>
-            <textarea id="orderID" onChange={this.handleOnChange}/>
-          </ColumnFlex>
-        </RowFlex>
-        <RowFlex>
-        <ColumnFlex>
-            <p>Is Pre-Paid</p>
-            <Select id="isPrePaid" onChange={this.handleOnChange}>
-              <option value="">Any</option>
-              <option value="1">True</option>
-              <option value="0">False</option>
-            </Select>
+            <p>From ID:</p>
+            <textarea id="from" onChange={this.handleOnChange}/>
           </ColumnFlex>
           <ColumnFlex>
-            <p>Cost less than:</p>
-            <textarea id="cost" onChange={this.handleOnChange}/>
-          </ColumnFlex>
-          <ColumnFlex>
-            <p>Completed</p>
-            <Select id="completed" onChange={this.handleOnChange}>
-              <option value="">Any</option>
-              <option value="1">True</option>
-              <option value="0">False</option>
-            </Select>
+            <p>To ID:</p>
+            <textarea id="to" onChange={this.handleOnChange}/>
           </ColumnFlex>
         </RowFlex>
-        <Button onClick={this.getOrders}></Button>
+
+        <Button onClick={this.getStops}>Go!</Button>
         <Table>
           <thead>
             <tr>
-              <TableHeader>OrderID</TableHeader>
-              <TableHeader>SenderID</TableHeader>
-              <TableHeader>ReceiverID</TableHeader>
-              <TableHeader>Cost</TableHeader>
-              <TableHeader>Complete</TableHeader>
-              <TableHeader>PrePaid</TableHeader>
+              <TableHeader>TrackingID</TableHeader>
+              <TableHeader>Next Location</TableHeader>
+              <TableHeader>Current Location</TableHeader>
+              <TableHeader>Stop Number</TableHeader>
             </tr>
           </thead>
           <tbody>

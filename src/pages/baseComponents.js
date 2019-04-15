@@ -23,11 +23,16 @@ export const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export const Button = styled.a`
+export const Button = styled.button`
   padding: 15px 30px;
   border: 1px solid blue;
   border-radius: 4px;
-  margin: 15px;
+  margin: 40px;
+  
+  box-sizing: border-box;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const Table = styled.table`

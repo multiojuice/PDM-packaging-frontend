@@ -8,17 +8,21 @@ class NewOrder extends Component {
       senderID: null,
       receiverID: null,
       isPrePaid: null,
-      cost: 10
+      cost: 10,
+      speed1: 1,
+      speed2: 1,
+      weight1: 0,
+      weight2: 0
     }
   }
 
 
   postOrder = () => {
-    let {senderID, cost, isPrePaid, receiverID} = this.state;
+    let {senderID, cost, isPrePaid, receiverID, speed1, speed2, weight1, weight2} = this.state;
     senderID = senderID !== '' && senderID !== null ? `senderID=${senderID}&` : '';
     isPrePaid = isPrePaid !== '' && isPrePaid !== null ? `isPrePaid=${isPrePaid}&` : '';
     receiverID = receiverID !== '' && receiverID !== null ? `receiverID=${receiverID}&` : '';
-    cost = cost !== '' && cost !== null ? `cost=${cost}&` : '';
+    cost = `cost=${parseInt(weight1) * parseFloat(speed1) + parseInt(weight2) * parseFloat(speed2)}&`;
 
     const str = senderID + isPrePaid + receiverID + cost;
     console.warn(str);
@@ -36,6 +40,8 @@ class NewOrder extends Component {
 
   render() {
     console.warn(this.state)
+    const {weight1, speed1, speed2, weight2} = this.state;
+
     return (
       <div>
         <ColumnFlex>
@@ -66,7 +72,7 @@ class NewOrder extends Component {
           <h3>1.</h3>
           <ColumnFlex>
             <p>Weight:</p>
-            <input></input>
+            <input id="weight2" onChange={this.handleOnChange}></input>
           </ColumnFlex>
           <ColumnFlex>
             <p>Traits</p>
@@ -74,14 +80,19 @@ class NewOrder extends Component {
           </ColumnFlex>
           <ColumnFlex>
             <p>Delivery Speed:</p>
-            <input></input>
+            <select onChange={this.handleOnChange} id="speed2">
+              <option value="1">Ground Standard</option>
+              <option value="1.5">Ground 2-day</option>
+              <option value="1.5">Air standard</option>
+              <option value="2.25">Air 1-day</option>
+            </select>
           </ColumnFlex>
         </RowFlex>
         <RowFlex>
           <h3>2.</h3>
           <ColumnFlex>
             <p>Weight:</p>
-            <input></input>
+            <input id="weight1" onChange={this.handleOnChange}></input>
           </ColumnFlex>
           <ColumnFlex>
             <p>Traits</p>
@@ -89,11 +100,16 @@ class NewOrder extends Component {
           </ColumnFlex>
           <ColumnFlex>
             <p>Delivery Speed:</p>
-            <input></input>
+            <select onChange={this.handleOnChange} id="speed1">
+              <option value="1">Ground Standard</option>
+              <option value="1.5">Ground 2-day</option>
+              <option value="1.5">Air standard</option>
+              <option value="2.25">Air 1-day</option>
+            </select>
           </ColumnFlex>
         </RowFlex>
 
-        <h3>Price: $24.10</h3>
+        <h3>Price: ${parseInt(weight1) * parseFloat(speed1) + parseInt(weight2) * parseFloat(speed2)}</h3>
         
         <div style={{padding:'40px'}}></div>
         <Button onClick={this.postOrder}>Submit</Button>

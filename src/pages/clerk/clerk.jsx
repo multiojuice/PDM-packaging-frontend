@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Button, RowFlex, Title, ButtonContainer } from '../baseComponents';
+import { ButtonLink, RowFlex, Title, ButtonContainer } from '../baseComponents';
 import NewOrder from './newOrder';
 import BrowseOrder from './browseOrder';
 class Clerk extends Component {
@@ -18,8 +18,8 @@ class Clerk extends Component {
         <RowFlex>
           <Title>PDM Clerk</Title>
           <ButtonContainer>
-            <Button href='/clerk'>New Order</Button>
-            <Button href='/clerk/browse'>Browse Orders</Button>
+            <ButtonLink href='/clerk'>New Order</ButtonLink>
+            <ButtonLink href='/clerk/browse'>Browse Orders</ButtonLink>
           </ButtonContainer>
         </RowFlex>
         <Switch>

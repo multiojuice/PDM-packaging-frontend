@@ -35,6 +35,18 @@ export const Button = styled.button`
   }
 `;
 
+export const ButtonLink = styled.a`
+  padding: 15px 30px;
+  border: 1px solid blue;
+  border-radius: 4px;
+  margin: 40px;
+  
+  box-sizing: border-box;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 export const Table = styled.table`
   font-family: arial, sans-serif;
   border-collapse: collapse;

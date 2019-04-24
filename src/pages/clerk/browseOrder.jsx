@@ -87,7 +87,7 @@ class BrowseOrder extends Component {
             </Select>
           </ColumnFlex>
           <ColumnFlex>
-            <p>Cost less than:</p>
+            <p>Cost:</p>
             <textarea id="cost" onChange={this.handleOnChange}/>
           </ColumnFlex>
           <ColumnFlex>
